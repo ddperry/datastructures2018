@@ -25,10 +25,13 @@ var cheerio = require('cheerio');
 // fs.writeFileSync('data/thesisTitles.txt', thesisTitles);
 
 var content = fs.readFileSync('../Assignment1/data/m03.txt');
-
 var $ = cheerio.load(content);
-
 var finalArray = []
+
+// $('tr').each(function(i,elem) {
+//   console.log(elem.children());
+// })
+
 
 $('td').each(function(i, elem) {
   if ($(elem).attr("style")=="border-bottom:1px solid #e3e3e3; width:260px") {
