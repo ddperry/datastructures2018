@@ -1,0 +1,82 @@
+SOME QUESTIONS
+- My device disconnected from the particle cloud a couple hours ago. This is indicated where it says "disabled" under the Watching category. 
+- I had to delete my credentials in the ecosystem.congig file because it wouldn't run with it there. Where are we supposed to use them?
+- I wasn't prompted to enter a pk when I set up my db. 
+- It's unclear if anything is writing to my db or if the table was set up. The snapshots in the instances are there, but I don't see any value readings. 
+  Is this because my photon is disconnected from the particle cloud? 
+- I also can't see my other db instance for the aa data assignments. I'm hoping that I didn't overwrite it when I set up this db.
+- Below is a thread of my console output when running 'pm2 start ecosystem.config.js'. It shows a few weird errors that are consistent so far: 
+          1) When I run 'pm2 list', it throws an error in the "status" column.
+          2) When I run 'pm2 start ecosystem.config.js', the status shows that it's online 
+          3) When I switch back/forth between those two commands, the status switches between the two.
+
+
+/home/ec2-user/environment/datastructures2018/Assignment9
+ddperry:~/environment/datastructures2018/Assignment9 (master) $ pm2 start ecosystem.config.js
+[PM2][ERROR] File ecosystem.config.js malformated
+/home/ec2-user/environment/datastructures2018/Assignment9/ecosystem.config.js:15
+      AWSRDS_EP: 'sensordatapotentiometer.cotemvynmyu1.us-east-1.rds.amazonaws.com',
+      ^^^^^^^^^
+
+SyntaxError: Unexpected identifier
+    at NativeCompileCache._moduleCompile (/home/ec2-user/.nvm/versions/node/v6.14.4/lib/node_modules/pm2/node_modules/v8-compile-cache/v8-compile-cache.js:226:18)
+    at Module._compile (/home/ec2-user/.nvm/versions/node/v6.14.4/lib/node_modules/pm2/node_modules/v8-compile-cache/v8-compile-cache.js:172:36)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (/home/ec2-user/.nvm/versions/node/v6.14.4/lib/node_modules/pm2/node_modules/v8-compile-cache/v8-compile-cache.js:159:20)
+    at Object.Common.parseConfig (/home/ec2-user/.nvm/versions/node/v6.14.4/lib/node_modules/pm2/lib/Common.js:256:12)
+    at API._startJson (/home/ec2-user/.nvm/versions/node/v6.14.4/lib/node_modules/pm2/lib/API.js:886:25)
+┌──────────┬────┬─────────┬──────┬─────┬────────┬─────────┬────────┬─────┬─────┬──────┬──────────┐
+│ App name │ id │ version │ mode │ pid │ status │ restart │ uptime │ cpu │ mem │ user │ watching │
+└──────────┴────┴─────────┴──────┴─────┴────────┴─────────┴────────┴─────┴─────┴──────┴──────────┘
+ Use `pm2 show <id|name>` to get more details about an app
+ddperry:~/environment/datastructures2018/Assignment9 (master) $ pm2 list
+┌──────────┬────┬─────────┬──────┬─────┬────────┬─────────┬────────┬─────┬─────┬──────┬──────────┐
+│ App name │ id │ version │ mode │ pid │ status │ restart │ uptime │ cpu │ mem │ user │ watching │
+└──────────┴────┴─────────┴──────┴─────┴────────┴─────────┴────────┴─────┴─────┴──────┴──────────┘
+ Use `pm2 show <id|name>` to get more details about an app
+ddperry:~/environment/datastructures2018/Assignment9 (master) $ pm2 start ecosystem.config.js
+[PM2][WARN] Applications API not running, starting...
+[PM2][ERROR] script not found : /home/ec2-user/environment/datastructures2018/Assignment9/sensorData.js
+┌──────────┬────┬─────────┬──────┬─────┬────────┬─────────┬────────┬─────┬─────┬──────┬──────────┐
+│ App name │ id │ version │ mode │ pid │ status │ restart │ uptime │ cpu │ mem │ user │ watching │
+└──────────┴────┴─────────┴──────┴─────┴────────┴─────────┴────────┴─────┴─────┴──────┴──────────┘
+ Use `pm2 show <id|name>` to get more details about an app
+ddperry:~/environment/datastructures2018/Assignment9 (master) $ pm2 start ecosystem.config.js
+[PM2][WARN] Applications API not running, starting...
+[PM2] App [API] launched (1 instances)
+┌──────────┬────┬─────────┬──────┬───────┬────────┬─────────┬────────┬─────┬───────────┬──────────┬──────────┐
+│ App name │ id │ version │ mode │ pid   │ status │ restart │ uptime │ cpu │ mem       │ user     │ watching │
+├──────────┼────┼─────────┼──────┼───────┼────────┼─────────┼────���───┼─────┼───────────┼──────────┼──────────┤
+│ API      │ 0  │ N/A     │ fork │ 32109 │ online │ 15      │ 0s     │ 0%  │ 17.0 MB   │ ec2-user │ disabled │
+└──────────┴────┴─────────┴──────┴───────┴────────┴─────────┴────────┴─────┴───────────┴──────────┴──────────┘
+ Use `pm2 show <id|name>` to get more details about an app
+ddperry:~/environment/datastructures2018/Assignment9 (master) $ pm2 start ecosystem.config.js
+[PM2] Applying action restartProcessId on app [API](ids: 0)
+[PM2] [API](0) ✓
+┌──────────┬────┬─────────┬──────┬─────┬────────┬─────────┬────────┬─────┬───────────┬──────────┬──────────┐
+│ App name │ id │ version │ mode │ pid │ status │ restart │ uptime │ cpu │ mem       │ user     │ watching │
+├──────────┼────┼─────────┼──────┼─────┼────────┼─────────┼────────┼─────┼───────────┼──────────┼──────────┤
+│ API      │ 0  │ N/A     │ fork │ 557 │ online │ 30      │ 0s     │ 0%  │ 15.8 MB   │ ec2-user │ disabled │
+└──────────┴────┴─────────┴──────┴─────┴────────┴─────────┴────────┴─────┴───────────┴──────────┴──────────┘
+ Use `pm2 show <id|name>` to get more details about an app
+ddperry:~/environment/datastructures2018/Assignment9 (master) $ pm2 list
+┌──────────┬────┬─────────┬──────┬─────┬─────────┬─────────┬────────┬─────┬────────┬──────────┬──────────┐
+│ App name │ id │ version │ mode │ pid │ status  │ restart │ uptime │ cpu │ mem    │ user     │ watching │
+├──────────┼────┼─────────┼──────┼─────┼─────────┼─────────┼────────┼─────┼────────┼──────────┼──────────┤
+│ API      │ 0  │ N/A     │ fork │ 0   │ errored │ 45      │ 0      │ 0%  │ 0 B    │ ec2-user │ disabled │
+└──────────┴────┴─────────┴──────┴─────┴─────────┴─────────┴────────┴─────┴────────┴──────────┴──────────┘
+ Use `pm2 show <id|name>` to get more details about an app
+ddperry:~/environment/datastructures2018/Assignment9 (master) $ pm2 start ecosystem.config.js
+[PM2] Applying action restartProcessId on app [API](ids: 0)
+[PM2] [API](0) ✓
+┌──────────┬────┬─────────┬──────┬──────┬────────┬─────────┬────────┬─────┬───────────┬──────────┬──────────┐
+│ App name │ id │ version │ mode │ pid  │ status │ restart │ uptime │ cpu │ mem       │ user     │ watching │
+├──────────┼────┼─────────┼──────┼──────┼────────┼─────────┼────────┼─────┼───────────┼──────────┼──────────┤
+│ API      │ 0  │ N/A     │ fork │ 1124 │ online │ 45      │ 0s     │ 0%  │ 12.8 MB   │ ec2-user │ disabled │
+└──────────┴────┴─────────┴──────┴──────┴────────┴─────────┴────────┴─────┴───────────┴──────────┴──────────┘
+ Use `pm2 show <id|name>` to get more details about an app
+ddperry:~/environment/datastructures2018/Assignment9 (master) $ 
