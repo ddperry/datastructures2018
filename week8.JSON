@@ -1,0 +1,13 @@
+{
+"cmd": "VarReturn",
+"name": "analogvalue",
+"result": 962,
+"coreInfo": {
+"last_app": "",
+"last_heard": "2018-11-21T23:58:53.138Z",
+"connected": true,
+"last_handshake_at": "2018-11-21T23:16:33.815Z",
+"deviceID": "31003b000647373034353237",
+"product_id": 6
+}
+}
